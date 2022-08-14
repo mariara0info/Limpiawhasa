@@ -34,8 +34,9 @@ def uploader():
   os.rename('./Archivos/'+str(filename), './Archivos/Whatlinks.txt')
   # Retornamos una respuesta satisfactoria
   resul12 = resuelvelo()
-  return render_template('Result_for_Textbox.html', SName =   '  '.join(resul12))  
-  #return "<h1>Archivo subido exitosamente</h1>"  
+  return render_template('Result_for_Textbox.html', SName =   ' , '.join(resul12)) 
+  #return "<h1>Archivo subido exitosamente</h1>"
+  # SName =   '  '.join(resul12))    
 
 def resuelvelo():
      df = pd.read_csv('./Archivos/Whatlinks.txt')
@@ -54,10 +55,11 @@ def resuelvelo():
           # Locate the box that contains title and transcript
           box = soup.find('div', class_='_9vd6 _9t33 _9bir _9bj3 _9bhj _9v12 _9tau _9tay _9u6w _9se- _9u5y')
           # Locate title and transcript
-          first_header = box.find('h3').get_text()
+          first_header = box.find('h3').get_text( )
      
           if len(first_header) != 0:
-           linder.append(listToStr +'<br>')
+           #linder.append(listToStr.strip(' '))          
+           linder.append(listToStr)
            archivo.write(first_header +'\n')
            archivo.write(listToStr +'\n')
   

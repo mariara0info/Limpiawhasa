@@ -50,17 +50,22 @@ def resuelvelo():
           #print(listToStr)
           r = requests.get(listToStr)
           soup = bs(r.content, 'html.parser')
-
-          # Locate the box that contains title and transcript
-          box = soup.find('div', class_='_9vd6 _9t33 _9bir _9bj3 _9bhj _9v12 _9tau _9tay _9u6w _9se- _9u5y')
-          # Locate title and transcript
-          first_header = box.find('h3').get_text()
+          first_header = soup.find('h2', {"class":"_2yzk"})
+          first_imagen = soup.find("span", {"class":"_2z9j"})
+          fit_imagen = str(first_imagen).replace('<span class="_2z9j" style="background-image: url(','')
+          f_imagen = str(fit_imagen).replace(')"></span>','')
+          fi_imagen = str(f_imagen).replace('amp;','')
      
-          if len(first_header) != 0:
-           linder.append(listToStr +'<br>')
-           archivo.write(first_header +'\n')
-           archivo.write(listToStr +'\n')
-  
+          if len(first_header.text) != 0:
+               #chat.append(first_header.text)
+               linder.append(listToStr)
+               #image1.append(fi_imagen)
+               archivo.write(first_header.text +'\n')
+               archivo.write(listToStr +'\n')
+               archivo.write(fi_imagen +'\n')         
+
+
+   
      archivo.close()
      return linder
     
